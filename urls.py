@@ -1,23 +1,21 @@
-"""
-URL configuration for faculty project.
 
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/5.1/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
-from django.contrib import admin
-from django.urls import path,include
+ 
+from django.urls import path
+from .views import appraisal_success_view, faculty_appraisal_view, register_faculty, faculty_dashboard, appraisal_form, login_faculty, logout_faculty,appraisal_list,appraisal_detail
+from django.contrib.auth import views as auth_views
+
+from appraisal import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('faculty/', include('appraisal.urls')),
+ 
+    path('dashboard/', faculty_dashboard, name='faculty_dashboard'),
+    path('appraisal/', appraisal_form, name='appraisal_form'),
+    path('register/', register_faculty, name='register_faculty'),
+    path('login/', login_faculty, name='login_faculty'),
+    path('logout/', logout_faculty, name='logout_faculty'),
+    path('fappraisal/', faculty_appraisal_view, name='faculty_appraisal_view'),
+    path('success/', appraisal_success_view, name='appraisal_success'),
+    path('ss', views.appraisal_list, name='appraisal_list'),
+    path('appraisald/<int:pk>/', views.appraisal_detail, name='appraisal_detail'),
+   
 ]
